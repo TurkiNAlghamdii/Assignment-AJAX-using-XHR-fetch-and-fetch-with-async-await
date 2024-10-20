@@ -1,4 +1,14 @@
-document.getElementById('search-btn').addEventListener('click', fetchWeather);
+let btn = document.getElementById('search-btn');
+let input = document.getElementById('city');
+
+
+btn.addEventListener('click', fetchWeather);
+
+input.onkeydown = function(event) {
+  if (event.keyCode == 13) {
+      fetchWeather();
+  }
+}
 
 async function fetchWeather() {
   const city = document.getElementById('city').value;
@@ -19,8 +29,12 @@ function updateWeatherInfo(data) {
   const highTemp = data.current.temp_c;
   const lowTemp = data.current.temp_c - 5;
   const windSpeed = data.current.wind_kph;
+  
+  let high = document.getElementById('high-temp');
+  let low = document.getElementById('low-temp');
+  let wind = document.getElementById('wind-speed');
 
-  document.getElementById('high-temp').textContent = highTemp + "°C";
-  document.getElementById('low-temp').textContent = lowTemp + "°C";
-  document.getElementById('wind-speed').textContent = windSpeed + " kph";
+  high.textContent = highTemp + "°C";
+  low.textContent = lowTemp + "°C";
+  wind.textContent = windSpeed + " kph";
 }
